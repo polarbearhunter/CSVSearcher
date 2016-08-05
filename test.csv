@@ -1,0 +1,8 @@
+Time,Date,Recipient Address,Sender Address,Subject,Extension,File,KB
+2:55:02 PM,"Thursday, July 30, 2015",Recipient1@email.com,Sender1@email.com,Prod testing,123 abc xyz.docx,docx,500
+3:01:07 PM,"Thursday, July 30, 2015",Recipient2@email.com,Sender1@email.com,Prod Testing,Important.doc,doc,550
+9:31:46 AM,"Friday, July 31, 2015",Recipient3@email.com,Sender1@email.com,testing,Zipfile1.zip,zip,600
+9:31:46 AM,"Friday, July 31, 2015",Recipient4@email.com,Sender1@email.com,testing,Zipfile2.zip,zip,650
+9:31:46 AM,"Friday, July 31, 2015",Recipient5@email.com,Sender1@email.com,testing,New-DB.zip,zip,700
+11:49:16 AM,"Friday, July 31, 2015",Recipient6@email.com,Sender1@email.com,testing,123 abc xyz1.docx,docx,750
+11:16:26 AM,"Wednesday, August 5, 2015",Recipient7@email.com,Sender1@email.com,testing,Excercise.docx,docx,800 July
