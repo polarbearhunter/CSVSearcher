@@ -52,9 +52,10 @@ if args.date is False:
 else:
     start_date =(datetime.datetime.strptime(args.date, '%m/%d/%Y').date())
 
-# print(start_date)
 
-with open(file_input, 'r', newline='') as input, open(file_output, 'w', newline='') as out, open(file_wordlist, 'r', newline='') as word_file:  # opens csv and declares output csv
+file_out_dated = (now_string + file_output)
+# print(start_date)
+with open(file_input, 'r', newline='') as input, open(file_out_dated, 'w', newline='') as out, open(file_wordlist, 'r', newline='') as word_file:  # opens csv and declares output csv
     reader = csv.reader(
         input, dialect="excel")  # declares csv reader
     # declares csv writer, lines end with new line, delimiter is now ~ so
@@ -90,6 +91,8 @@ with open(file_input, 'r', newline='') as input, open(file_output, 'w', newline=
                     cur_row.append(row[7])
                     cur_row.append(wordlist[X])
                     key = (row[2], row[3], row[4], row[5])
+                    # print(comp_date)
+                    # print(comp_now)
                     if key not in entries:  # if the key is not found in that line
                         if comp_date > start_date:
                             writer.writerow(cur_row)  # write to the output file
@@ -98,6 +101,3 @@ with open(file_input, 'r', newline='') as input, open(file_output, 'w', newline=
 #:DONE:10 Find a way to limit search by date. using start_date until current date. Not sure how to check, but removed a ton of code by reworking it
 #:DONE:0 clean up the way that we search in wordlist so that it doesn't include col(0,1,2,3) search only by 4,5 Or is this done?
 #:TODO:0 find some way that the trigger word is bolded so you can see it EG trigger word is sin, found in crosSINg
-
-#Clean-up and renaming
-os.replace(file_output, now_string + file_output)
