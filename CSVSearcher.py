@@ -85,7 +85,7 @@ elif len(args.year) is 4 and args.year.isdigit():
 else:  # if years is not a year then error message and quit
     print('\n-------------------------------------------------\nERROR: Please make sure you input a proper year\n-------------------------------------------------')
     sys.exit()
-# TODO:10 Need to figure out a better way to do dates for searching
+# TODO:30 Need to figure out a better way to do dates for searching
 # if date_days is not ' ':
 #     date_new = (datetime.timedelta(days=int(date_days)))
 #     date_temp = str(datetime.date.today() - date_new)
@@ -134,7 +134,7 @@ with open('OutWithDupes.csv', 'r', newline='') as input_sort:  # opens csv
     print(row[2])
 #    for row in sortedlist:
 #        row[2] = datetime.datetime.strptime(row[2]+0 row[2], '%B, %d %Y')
-# TODO:0 Find a way to make the dates prettier and change to 2016-08-04 Which I can then transform back
+# TODO:10 Find a way to make the dates prettier and change to 2016-08-04 Which I can then transform back
     # replace all , with : while delimiter is ~ so we can bring it back
     # together properly
     sortedlist = [x.replace(',', '')for x in sortedlist]
@@ -187,7 +187,7 @@ with open('OutDateSort.csv', 'r', newline='') as dup_in, open(file_output, 'w', 
         if key not in entries:  # if the key is not found in that line
             dup_writer.writerow(row)  # write to the output file
             entries.add(key)  # and add to the key
-#TODO: add a row at the end and figure out whhich keyword the row hit off of
+#DONE:0 add a row at the end and figure out whhich keyword the row hit off of
 
 #Clean-up and renaming
 os.remove('OutWithDupes.csv')  # Clean-up temp files
