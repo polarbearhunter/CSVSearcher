@@ -85,7 +85,7 @@ elif len(args.year) is 4 and args.year.isdigit():
 else:  # if years is not a year then error message and quit
     print('\n-------------------------------------------------\nERROR: Please make sure you input a proper year\n-------------------------------------------------')
     sys.exit()
-# TODO:30 Need to figure out a better way to do dates for searching
+# TODO:20 Need to figure out a better way to do dates for searching
 # if date_days is not ' ':
 #     date_new = (datetime.timedelta(days=int(date_days)))
 #     date_temp = str(datetime.date.today() - date_new)
@@ -111,19 +111,30 @@ with open(file_input, 'r', newline='') as input_in, open('OutWithDupes.csv', 'w'
     wordlist_len = len(wordlist)  # finds length of wordlist and saves as a var
     # pulls the header line so that it can be saved
     headers = next(input_reader)
+    headers.insert(1, 'Weekday')
+    headers.insert(9, 'Keyword')
     for row in input_reader:  # for every row in the csv
         for col in row:  # for every column in said row
             for X in range(wordlist_len):  # for as long as we have words
                 # if word X matches something in that column (sent to lower so
                 # we don't need to worry about case)
                 if wordlist[X].lower() in col.lower():
+                    cur_row = []
+                    cur_row.append(row[0])
+                    cur_row.append(row[1])
+                    cur_row.append(row[2])
+                    cur_row.append(row[3])
+                    cur_row.append(row[4])
+                    cur_row.append(row[5])
+                    cur_row.append(row[6])
+                    cur_row.append(row[7])
+                    cur_row.append(wordlist[X])
                     # write that row to the out csv
-                    input_writer.writerow(row)
-
+                    input_writer.writerow(cur_row)
+                    # print (cur_row)
 with open('OutWithDupes.csv', 'r', newline='') as input_sort:  # opens csv
     input_sort_reader = csv.reader(
         input_sort, delimiter='~')  # declares csv reader
-
     # print(input_sort)
     # attempts to sort but only 1 column WIP
     sortedlist = sorted(input_sort, key=lambda col: col[1])
@@ -131,27 +142,29 @@ with open('OutWithDupes.csv', 'r', newline='') as input_sort:  # opens csv
     # replace all , with : while delimiter is ~ so we can bring it back
     # together properly
     sortedlist = [w.replace(',', '~', 1)for w in sortedlist]
-    print(row[2])
+    # print(row[2])
 #    for row in sortedlist:
 #        row[2] = datetime.datetime.strptime(row[2]+0 row[2], '%B, %d %Y')
-# TODO:10 Find a way to make the dates prettier and change to 2016-08-04 Which I can then transform back
+# TODO:0 Find a way to make the dates prettier and change to 2016-08-04 Which I can then transform back
     # replace all , with : while delimiter is ~ so we can bring it back
     # together properly
     sortedlist = [x.replace(',', '')for x in sortedlist]
-    print(sortedlist)
+    # print(sortedlist)
     # replace all previous ~ delimiters with commas, leaving us with a CSV
     # with the commas removed!!
     sortedlist = [y.replace('~', ',')for y in sortedlist]
-    print(sortedlist)
+    # print(sortedlist)
 # Formatting
 with open('OutWithDupes.csv', 'w', newline='') as input_sorted:  # opens csv
     input_sort_writer = csv.writer(
         input_sorted, lineterminator='\n', escapechar=' ', quoting=csv.QUOTE_NONE)  # declares csv writer
-    headers.insert(1, 'Weekday')
+
     for i in sortedlist:  # for the items in sortedlist
         # removes some formatting issues of \n showing up messing up the
         # formatting
         formatedlist.append(i.strip())
+    # print(formatedlist)
+    # print (sortedlist)
     for row in formatedlist:  # for every row in the formated list
         input_sort_writer.writerow([row])  # write out in a new row
         # processing finished, now a csv, cat'ing the output csv file will show
@@ -187,7 +200,13 @@ with open('OutDateSort.csv', 'r', newline='') as dup_in, open(file_output, 'w', 
         if key not in entries:  # if the key is not found in that line
             dup_writer.writerow(row)  # write to the output file
             entries.add(key)  # and add to the key
-#DONE:0 add a row at the end and figure out whhich keyword the row hit off of
+#DONE:10 add a row at the end and figure out whhich keyword the row hit off of
+# headers.insert(9, 'Keyword') 9 if after weekdays add, 8 if before
+#
+#
+#
+#
+
 
 #Clean-up and renaming
 os.remove('OutWithDupes.csv')  # Clean-up temp files
