@@ -48,7 +48,7 @@ else:  # if dictionary is not a txt file then display and error message and quit
     sys.exit()
 
 if args.date is False:
-    start_date = now.replace(year=1000)
+    start_date = (now.replace(year=1000).date())
 else:
     start_date =(datetime.datetime.strptime(args.date, '%m/%d/%Y').date())
 
@@ -90,8 +90,6 @@ with open(file_input, 'r', newline='') as input, open(file_output, 'w', newline=
                     cur_row.append(row[7])
                     cur_row.append(wordlist[X])
                     key = (row[2], row[3], row[4], row[5])
-                    # print(comp_date)
-                    # print(comp_now)
                     if key not in entries:  # if the key is not found in that line
                         if comp_date > start_date:
                             writer.writerow(cur_row)  # write to the output file
@@ -102,6 +100,4 @@ with open(file_input, 'r', newline='') as input, open(file_output, 'w', newline=
 #:TODO:0 find some way that the trigger word is bolded so you can see it EG trigger word is sin, found in crosSINg
 
 #Clean-up and renaming
-
-now_string = str(now.strftime("%Y-%m-%d_"))
 os.replace(file_output, now_string + file_output)
